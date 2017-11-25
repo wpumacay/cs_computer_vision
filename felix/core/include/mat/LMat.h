@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "../LCommon.h"
+#include "../../LCommon.h"
 
-
+using namespace std;
 
 namespace felix
 {
@@ -71,8 +71,39 @@ namespace felix
                 }
             }
 
+            void operator() ( int col, int row, int off, T v )
+            {
+                int _pixIndx = col + row * m_cols;
 
+                m_buffer[ m_channels * _pixIndx + off ] = v;
+            }
 
+            float operator() ( int col, int row, int channel )
+            {
+                int _pixIndx = col + row * m_cols;
+
+                return m_buffer[ m_channels * _pixIndx + channel ];
+            }
+
+            float get ( int col, int row, int channel ) const
+            {
+                int _pixIndx = col + row * m_cols;
+
+                return m_buffer[ m_channels * _pixIndx + channel ];
+            }
+
+            void dump( int cutoff = 300 )
+            {
+                cout << "matDump" << endl;
+                for ( int q = 0; q < m_channels * m_size; q++ )
+                {
+                    if ( q >= cutoff )
+                    {
+                        break;
+                    }
+                    cout << (int)m_buffer[q] << endl;
+                }
+            }
 
             int rows() const
             {
@@ -97,6 +128,39 @@ namespace felix
             T* buffer() const
             {
                 return m_buffer;
+            }
+
+            static LMat<T> testImg()
+            {
+                int _w = 100;
+                int _h = 100;
+
+                LMat<T> _img( _h, _w, 3 );
+
+                T* _imgBuff = _img.buffer();
+
+                for ( int k = 0; k < 3; k++ )
+                {
+                    T val = 0;
+
+                    if ( k == 2 )
+                    {
+                        val = 255;
+                    }
+
+                    for ( int i = 0; i < _h; i++ )
+                    {
+                        for ( int j = 0; j < _w; j++ )
+                        {
+                            int _pixIndx = j + i * _w;
+
+                            _imgBuff[ k * _w * _h + _pixIndx ] = val;
+                        }
+                    }
+                }
+
+        
+                return _img;
             }
 
         };
@@ -124,6 +188,9 @@ namespace felix
             return _res;
         }
 
+
+        typedef LMat<u8> LMatu;
+        typedef LMat<float> LMatf;
 
     }
 

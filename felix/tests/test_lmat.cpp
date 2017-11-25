@@ -2,16 +2,14 @@
 
 #include <iostream>
 
+#include <mat/LMat.h>
+
 #include <CImg.h>
-#include <LMat.h>
 #include <plugins/felixMat.h>
 
 using namespace std;
 
 using namespace cimg_library;
-
-typedef unsigned char u8;
-typedef unsigned int  u32;
 
 
 int main() 
