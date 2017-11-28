@@ -71,6 +71,11 @@ namespace felix
                 }
             }
 
+            void copyFromBuffer( T* pData )
+            {
+                memcpy( m_buffer, pData, sizeof( T ) * m_size * m_channels );
+            }
+
             void operator() ( int col, int row, int off, T v )
             {
                 int _pixIndx = col + row * m_cols;
@@ -145,7 +150,14 @@ namespace felix
 
                     if ( k == 2 )
                     {
-                        val = 255;
+                        if ( sizeof( T ) == sizeof( u8 ) )
+                        {
+                            val = 255;
+                        }
+                        else
+                        {
+                            val = 1;
+                        }
                     }
 
                     for ( int i = 0; i < _h; i++ )
@@ -154,7 +166,7 @@ namespace felix
                         {
                             int _pixIndx = j + i * _w;
 
-                            _imgBuff[ k * _w * _h + _pixIndx ] = val;
+                            _imgBuff[ 3 * ( _pixIndx ) + k ] = val;
                         }
                     }
                 }

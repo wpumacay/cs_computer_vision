@@ -90,6 +90,10 @@ namespace felix
             {
                 for ( int x = 0; x < _w; x++ )
                 {
+
+#ifdef OPENMP_SUPPORT_ENABLED
+                #pragma omp parallel for num_threads( OPENMP_NUM_THREADS )
+#endif
                     for ( int y = 0; y < _h; y++ )
                     {
                         // 1. Transform it to image centric coordinates

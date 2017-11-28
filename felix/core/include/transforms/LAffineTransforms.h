@@ -3,7 +3,6 @@
 #pragma once
 
 #include "../mat/LMat.h"
-#include "../mat/LGpuMat.h"
 
 using namespace std;
 

@@ -8,8 +8,18 @@
 #include <cmath>
 #include <map>
 #include <algorithm>
+#include <cstring>
 
-#include <cstddef>
+
+#ifdef OPENMP_SUPPORT_ENABLED
+
+#define OPENMP_NUM_THREADS 4
+#include <omp.h>
+
+#endif
+
+#define CUDA_MAX_THREADS_PER_BLOCK 1024
+#define CUDA_THREADS_SPLIT_2D 32
 
 
 typedef unsigned char u8;
