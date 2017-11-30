@@ -37,7 +37,7 @@ endif()
 
 if ( OPENMP_FOUND )
 
-set( CMAKE_CXX_FLAGS_DEBUG "-g -Wno-unused-parameter ${OPENMP_CXX_FLAGS}" )
+set( CMAKE_CXX_FLAGS_DEBUG "-g -Wno-unused-parameter ${OpenMP_CXX_FLAGS}" )
 add_definitions( -DOPENMP_SUPPORT_ENABLED )
 message( "OPENMP SUPPORT ENABLED" )
 

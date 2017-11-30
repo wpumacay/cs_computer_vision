@@ -92,7 +92,7 @@ namespace felix
             int _bx = ceil( ( float ) pDstCols / CUDA_THREADS_SPLIT_2D );
             int _by = ceil( ( float ) pDstRows / CUDA_THREADS_SPLIT_2D );
 
-            cout << "partition: " << _bx << " - " << _by << endl;
+            //cout << "partition: " << _bx << " - " << _by << endl;
 
             core::LCudaMat _res( pDstRows, pDstCols, lmat.channels() );
 
@@ -118,7 +118,7 @@ namespace felix
             float _c32 = -( pMatrix3f[0] * pMatrix3f[5] - pMatrix3f[2] * pMatrix3f[3] ) / _det;
             float _c33 = 1.0f;
 
-            cout << "_det: " << _det << endl;
+            //cout << "_det: " << _det << endl;
 
             float _pMatInv[9] = { _c11, _c21, _c31,
                                   _c12, _c22, _c32,
@@ -153,9 +153,7 @@ namespace felix
             _matrix3f[3] = 0.0f; _matrix3f[4] = sy;   _matrix3f[5] = 0.0f;
             _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
-            cout << "fun" << endl;
             core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
-            cout << "bar" << endl;
 
             delete[] _matrix3f;
 
@@ -175,9 +173,7 @@ namespace felix
             _matrix3f[3] = _s;   _matrix3f[4] = _c;   _matrix3f[5] = 0.0f;
             _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
-            cout << "fun" << endl;
             core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
-            cout << "bar" << endl;
 
             delete[] _matrix3f;
 
@@ -194,9 +190,7 @@ namespace felix
             _matrix3f[3] = 0.0f; _matrix3f[4] = 1.0f; _matrix3f[5] = ty;
             _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
-            cout << "fun" << endl;
             core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
-            cout << "bar" << endl;
 
             delete[] _matrix3f;
 

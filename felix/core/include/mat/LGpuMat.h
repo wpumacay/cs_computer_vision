@@ -48,7 +48,6 @@ namespace felix
 
                 m_bufferSize = 0;
 
-                std::cout << "???" << std::endl;
             }
 
             LGpuMat( int rows, int cols, int channels )
@@ -63,7 +62,6 @@ namespace felix
                 m_bufferSize = sizeof( float ) * rows * cols * channels;
 
                 // Extend this
-                std::cout << "??? 1 : " << m_bufferSize << std::endl;
             }
 
             LGpuMat( int rows, int cols, int channels, float* pData )
@@ -80,7 +78,6 @@ namespace felix
                 memcpy( m_host_cpuBuffer, pData, m_bufferSize );
 
                 // Extend this
-                std::cout << "??? 2" << std::endl;
             }
 
             void copyFromBuffer( float* pData )

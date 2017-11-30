@@ -29,10 +29,12 @@ namespace felix
 
             private :
 
-//#ifdef CUDA_SUPPORT_ENABLED
+#ifdef CUDA_SUPPORT_ENABLED
 
             LGpuCudaHandler* m_cudaHandler;
-//#endif
+            cudaEvent_t m_evtStart;
+            cudaEvent_t m_evtStop;
+#endif
             LGpuManager()
             {
                 
@@ -43,6 +45,10 @@ namespace felix
 
             static LGpuManager* instance;
             static void create();
+
+            void timerStart();
+            void timerStop();
+            float getElapsedTime(); 
 
             void init();
             void loadToDevice( core::LGpuMat* pMat );

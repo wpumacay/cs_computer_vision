@@ -9,13 +9,13 @@ namespace felix
     {
         void LCudaMat::loadToGpu()
         {
-            std::cout << "loadToGpu" << std::endl;
+            //std::cout << "loadToGpu" << std::endl;
             gpu::LGpuManager::instance->loadToDevice( this );
         }
 
         void LCudaMat::loadFromGpu()
         {
-            std::cout << "loadFromGpu" << std::endl;
+            //std::cout << "loadFromGpu" << std::endl;
             gpu::LGpuManager::instance->loadFromDevice( this );
         }
     }

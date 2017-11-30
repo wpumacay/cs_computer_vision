@@ -18,6 +18,8 @@ felix::core::LCudaMat g_imgCuda;
 
 void onTrackbarCallbackRotation( float value )
 {
+    felix::gpu::LGpuManager::instance->timerStart();
+
     felix::core::LCudaMat _imgRes = felix::cuda::LCudaAffineTransforms::rotate( g_imgCuda,
                                                                                 g_imgCuda.cols(),
                                                                                 g_imgCuda.rows(),
@@ -31,10 +33,17 @@ void onTrackbarCallbackRotation( float value )
     _imgRes.releaseMemory();
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+
+    felix::gpu::LGpuManager::instance->timerStop();
+    float _duration = felix::gpu::LGpuManager::instance->getElapsedTime();
+
+    cout << "delta-rotation: " << _duration << endl;
 }
 
 void onTrackbarCallbackTranslation( float value )
 {
+    felix::gpu::LGpuManager::instance->timerStart();
+
     felix::core::LCudaMat _imgRes = felix::cuda::LCudaAffineTransforms::translate( g_imgCuda,
                                                                                    g_imgCuda.cols(),
                                                                                    g_imgCuda.rows(),
@@ -48,10 +57,17 @@ void onTrackbarCallbackTranslation( float value )
     _imgRes.releaseMemory();
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+
+    felix::gpu::LGpuManager::instance->timerStop();
+    float _duration = felix::gpu::LGpuManager::instance->getElapsedTime();
+
+    cout << "delta-translation: " << _duration << endl;
 }
 
 void onTrackbarCallbackScale( float value )
 {
+    felix::gpu::LGpuManager::instance->timerStart();
+
     felix::core::LCudaMat _imgRes = felix::cuda::LCudaAffineTransforms::scale( g_imgCuda,
                                                                                g_imgCuda.cols(),
                                                                                g_imgCuda.rows(),
@@ -66,6 +82,11 @@ void onTrackbarCallbackScale( float value )
     _imgRes.releaseMemory();
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+
+    felix::gpu::LGpuManager::instance->timerStop();
+    float _duration = felix::gpu::LGpuManager::instance->getElapsedTime();
+
+    cout << "delta-scale: " << _duration << endl;
 }
 
 int main()

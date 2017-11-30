@@ -14,8 +14,11 @@ using namespace std;
 felix::core::LMatu* g_img;
 felix::core::LMatf g_imgf;
 
+felix::utils::LCpuTimer g_cpuTimer;
+
 void onTrackbarCallbackRotation( float value )
 {
+    g_cpuTimer.start();
     felix::core::LMatf _imgResf = felix::transforms::LAffineTransforms::rotate( g_imgf,
                                                                                 g_imgf.cols(),
                                                                                 g_imgf.rows(),
@@ -26,10 +29,15 @@ void onTrackbarCallbackRotation( float value )
 
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+
+    float _duration = g_cpuTimer.stop();
+
+    cout << "delta-rotation: " << _duration * 1000.0f << endl;
 }
 
 void onTrackbarCallbackTranslation( float value )
 {
+    g_cpuTimer.start();
     felix::core::LMatf _imgResf = felix::transforms::LAffineTransforms::translate( g_imgf,
                                                                                    g_imgf.cols(),
                                                                                    g_imgf.rows(),
@@ -40,10 +48,15 @@ void onTrackbarCallbackTranslation( float value )
 
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+
+    float _duration = g_cpuTimer.stop();
+
+    cout << "delta-translation: " << _duration * 1000.0f << endl;
 }
 
 void onTrackbarCallbackScale( float value )
 {
+    g_cpuTimer.start();
     felix::core::LMatf _imgResf = felix::transforms::LAffineTransforms::scale( g_imgf,
                                                                                g_imgf.cols(),
                                                                                g_imgf.rows(),
@@ -55,11 +68,13 @@ void onTrackbarCallbackScale( float value )
 
     _imgResf.releaseMemory();
     _imgResu.releaseMemory();
+    float _duration = g_cpuTimer.stop();
+
+    cout << "delta-scale: " << _duration * 1000.0f << endl;
 }
 
 int main()
 {
-
 
     cout << "testing visualizer" << endl;
 

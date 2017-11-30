@@ -46,7 +46,7 @@ namespace felix
             if ( pMat->getGpuType() == core::type::CUDA )
             {
 #ifdef CUDA_SUPPORT_ENABLED
-                cout << "pMat: " << pMat << endl;
+                //cout << "pMat: " << pMat << endl;
                 m_cudaHandler->loadToDevice( (core::LCudaMat*) pMat );
 #else
                 cout << "LGpuManager::loadToDevice> no support enabled for cuda :(" << endl;
@@ -68,7 +68,7 @@ namespace felix
             if ( pMat->getGpuType() == core::type::CUDA )
             {
 #ifdef CUDA_SUPPORT_ENABLED
-                cout << "pMat2: " << pMat << endl;
+                //cout << "pMat2: " << pMat << endl;
                 m_cudaHandler->loadFromDevice( (core::LCudaMat*) pMat );
 #else
                 cout << "LGpuManager::loadFromDevice> no support enabled for cuda :(" << endl;
@@ -82,6 +82,34 @@ namespace felix
                 cout << "LGpuManager::loadFromDevice> no support enabled for opencl :(" << endl;
 #endif
             }
+        }
+
+
+        void LGpuManager::timerStart()
+        {
+#ifdef CUDA_SUPPORT_ENABLED
+            cudaEventCreate( &m_evtStart );
+            cudaEventCreate( &m_evtStop );
+            cudaEventRecord( m_evtStart, 0 );
+#endif
+        }
+
+        void LGpuManager::timerStop()
+        {
+#ifdef CUDA_SUPPORT_ENABLED
+            cudaEventRecord( m_evtStop, 0 );
+            cudaEventSynchronize( m_evtStop );
+#endif
+        }
+
+        float LGpuManager::getElapsedTime()
+        {
+            float _time = 0.0f;
+
+#ifdef CUDA_SUPPORT_ENABLED
+            cudaEventElapsedTime( &_time, m_evtStart, m_evtStop );
+#endif
+            return _time;
         }
 
     }
