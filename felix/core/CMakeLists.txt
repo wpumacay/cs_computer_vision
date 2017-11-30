@@ -11,6 +11,9 @@ include_directories( include/ /usr/local/include )
 cuda_add_library( felix
                   src/transforms/LAffineTransforms.cpp
                   src/utils/LUtils.cpp
+                  src/visualizer/LVisualizerManager.cpp
+                  src/visualizer/gtk/LVisualizerGtk.cpp
+                  src/visualizer/gtk/LWindowGtk.cpp
                   src/mat/LCudaMat.cpp
                   src/gpu/LGpuManager.cpp
                   src/gpu/LGpuCudaHandler.cpp

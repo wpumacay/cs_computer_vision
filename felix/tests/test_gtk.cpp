@@ -1,4 +1,8 @@
 
+#include <iostream>
+
+using namespace std;
+
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -9,16 +13,18 @@ activate (GtkApplication* app,
 {
   GtkWidget *window;
 
-  window = gtk_application_window_new (app);
-  gtk_window_set_title (GTK_WINDOW (window), "Window");
-  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
-  gtk_widget_show_all (window);
+  //window = gtk_application_window_new (app);
+  //gtk_window_set_title (GTK_WINDOW (window), "Window");
+  //gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
+  //gtk_widget_show_all (window);
 
   unsigned char* _foo = new unsigned char[10];
 
   GBytes* _buff = g_bytes_new( _foo, sizeof( unsigned char ) * 12 );
 
   GdkPixbuf* _pbuff = gdk_pixbuf_new_from_bytes( _buff, GDK_COLORSPACE_RGB, true, 8, 3, 1, 0 );
+
+  cout << "???" << endl;
 }
 
 int
@@ -31,6 +37,11 @@ main (int    argc,
   app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
   status = g_application_run (G_APPLICATION (app), argc, argv);
+
+  cout << "argc; " << argc << endl;
+  cout << "argv; " << *argv << endl;
+  cout << "foooo" << endl;
+
   g_object_unref (app);
 
   return status;

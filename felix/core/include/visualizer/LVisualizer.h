@@ -2,9 +2,6 @@
 #pragma once
 
 #include "../../LCommon.h"
-#include "../mat/LMat.h"
-#include "../mat/LGpuMat.h"
-
 #include "LAbstractWindow.h"
 
 using namespace std;
@@ -22,69 +19,48 @@ namespace felix
 
             map< string, LAbstractWindow* > m_windows;
 
-            LVisualizer();
-
-            virtual void _requestWindowCreation( string swName )
-            {
-                // Override this
-            }
-
-            virtual void _requestWindowDisplay( string swName,
-                                                int width,
-                                                int height,
-                                                int channels,
-                                                u8* buffer )
-            {
-                // Override this
-            }
-
             public :
 
-            ~LVisualizer();
+            LVisualizer()
+            {
 
-            static LVisualizer* instance;
+            }
 
-            static void create()
+            ~LVisualizer()
+            {
+
+            }
+
+
+            virtual void requestWindowCreation( string swName )
             {
                 // Override this
             }
 
-            virtual void init()
+            virtual void requestWindowDisplay( string swName,
+                                               int width,
+                                               int height,
+                                               int channels,
+                                               u8* buffer )
             {
                 // Override this
             }
 
-            void makeWindow( const char* wName )
+            virtual void requestTrackbarCreation( string wName, string tName,
+                                                  int min, int max, int tick, 
+                                                  LFnPtr_trackbar callback )
             {
-                _requestWindowCreation( string( wName ) );
+                // Override this
             }
 
-            void showMat( const char* wName, LMat* pMat )
+            virtual void showAll()
             {
-                _requestWindowDisplay( string( wName ), 
-                                       pMat->cols(),
-                                       pMat->rows(),
-                                       pMat->channels(),
-                                       pMat->buffer() );
+                // Override this
             }
-
-            void showGpuMat( const char* wName, LGpuMat* pMat )
-            {
-
-            }
-
 
         };
 
-
-
-
-
-
-
     }
-
-
 
 
 }

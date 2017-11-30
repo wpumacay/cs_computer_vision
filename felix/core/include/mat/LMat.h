@@ -76,11 +76,11 @@ namespace felix
                 memcpy( m_buffer, pData, sizeof( T ) * m_size * m_channels );
             }
 
-            void operator() ( int col, int row, int off, T v )
+            void operator() ( int col, int row, int c, T v )
             {
                 int _pixIndx = col + row * m_cols;
 
-                m_buffer[ m_channels * _pixIndx + off ] = v;
+                m_buffer[ m_channels * _pixIndx + c ] = v;
             }
 
             float operator() ( int col, int row, int channel )

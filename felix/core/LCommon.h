@@ -21,6 +21,7 @@
 #define CUDA_MAX_THREADS_PER_BLOCK 1024
 #define CUDA_THREADS_SPLIT_2D 32
 
+typedef void ( *LFnPtr_trackbar )( float value );
 
 typedef unsigned char u8;
 typedef unsigned short u16;

@@ -33,8 +33,8 @@ int main()
     //_scaleMat[3] = 0.0f; _scaleMat[4] = 2.0f; _scaleMat[5] = 0.0f;
     //_scaleMat[6] = 0.0f; _scaleMat[7] = 0.0f; _scaleMat[8] = 1.0f;
 
-    _scaleMat[0] = _c; _scaleMat[1] = -_s; _scaleMat[2] = 0.0f;
-    _scaleMat[3] = _s; _scaleMat[4] = _c; _scaleMat[5] = 0.0f;
+    _scaleMat[0] = 2.0f; _scaleMat[1] = 0.0f; _scaleMat[2] = 0.0f;
+    _scaleMat[3] = 0.0f; _scaleMat[4] = 2.0f; _scaleMat[5] = 0.0f;
     _scaleMat[6] = 0.0f; _scaleMat[7] = 0.0f; _scaleMat[8] = 1.0f;
 
     //_scaleMat[0] = 1.0f; _scaleMat[1] = 0.0f; _scaleMat[2] = -50.0f;
