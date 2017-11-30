@@ -71,6 +71,11 @@ namespace felix
                 }
             }
 
+            void releaseMemory()
+            {
+                delete[] m_buffer;
+            }
+
             void copyFromBuffer( T* pData )
             {
                 memcpy( m_buffer, pData, sizeof( T ) * m_size * m_channels );

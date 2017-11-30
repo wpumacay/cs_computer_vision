@@ -67,7 +67,8 @@ namespace felix
             if ( m_image == NULL )
             {
                 m_image = ( GtkImage* ) gtk_image_new_from_pixbuf( _pbuff );
-                gtk_container_add( GTK_CONTAINER( m_frame ), ( GtkWidget* ) m_image );
+                //gtk_container_add( GTK_CONTAINER( m_frame ), ( GtkWidget* ) m_image );
+                gtk_box_set_center_widget( ( GtkBox* ) m_frame, ( GtkWidget* ) m_image );
             }
             else
             {

@@ -104,6 +104,11 @@ namespace felix
                 // opencl -> should request singleton manager and load buffer from device
             }
 
+            virtual void releaseMemory()
+            {
+                // Override this
+            }
+
             int rows() const
             {
                 return m_rows;

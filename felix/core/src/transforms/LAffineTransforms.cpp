@@ -107,11 +107,6 @@ namespace felix
                         // 3. Apply interpolation of the pixel at _x, _y in the src image
                         float _v = LAffineTransforms::_interpolate_nn( lmat, _x, _y, k );
 
-                        //cout << "_v: " << _v << endl;
-
-                        //cout << "x: " << _x << " - y: " << _y << endl;
-                        //cout << "w: " << _w << " - h: " << _h << endl;
-
                         _res( x, y, k, _v );
                     }
                 }
@@ -126,13 +121,15 @@ namespace felix
                                               float sx, float sy, 
                                               interpolation::_interpolation pInterpolation )
         {
-            core::LMatf _res( pCols, pRows, lmat.channels() );
+            float* _matrix3f = new float[9];
 
+            _matrix3f[0] = sx;   _matrix3f[1] = 0.0f; _matrix3f[2] = 0.0f;
+            _matrix3f[3] = 0.0f; _matrix3f[4] = sy;   _matrix3f[5] = 0.0f;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
+            core::LMatf _res = LAffineTransforms::warpAffine( lmat, pCols, pRows, _matrix3f, pInterpolation );
 
-
-
-
+            delete[] _matrix3f;
 
             return _res;
         }
@@ -142,13 +139,18 @@ namespace felix
                                                float angle, 
                                                interpolation::_interpolation pInterpolation )
         {
-            core::LMatf _res( pCols, pRows, lmat.channels() );
+            float* _matrix3f = new float[9];
 
+            float _c = cos( angle );
+            float _s = sin( angle );
 
+            _matrix3f[0] = _c;   _matrix3f[1] = -_s;  _matrix3f[2] = 0.0f;
+            _matrix3f[3] = _s;   _matrix3f[4] = _c;   _matrix3f[5] = 0.0f;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
+            core::LMatf _res = LAffineTransforms::warpAffine( lmat, pCols, pRows, _matrix3f, pInterpolation );
 
-
-
+            delete[] _matrix3f;
 
             return _res;
         }
@@ -158,13 +160,15 @@ namespace felix
                                                   float tx, float ty, 
                                                   interpolation::_interpolation pInterpolation )
         {
-            core::LMatf _res( pCols, pRows, lmat.channels() );
+            float* _matrix3f = new float[9];
 
+            _matrix3f[0] = 1.0f; _matrix3f[1] = 0.0f; _matrix3f[2] = tx;
+            _matrix3f[3] = 0.0f; _matrix3f[4] = 1.0f; _matrix3f[5] = ty;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
 
+            core::LMatf _res = LAffineTransforms::warpAffine( lmat, pCols, pRows, _matrix3f, pInterpolation );
 
-
-
-
+            delete[] _matrix3f;
 
             return _res;
         }

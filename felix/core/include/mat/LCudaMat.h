@@ -34,20 +34,20 @@ namespace felix
             {
                 m_dev_gpuBuffer = NULL;
                 m_type = type::CUDA;
-                std::cout << "no malloc!" << std::endl;
+                //std::cout << "no malloc!" << std::endl;
             }
 
             LCudaMat( int rows, int cols, int channels ) 
                 : LGpuMat( rows, cols, channels )
             {
-                std::cout << "malloc! 1" << std::endl;
+                //std::cout << "malloc! 1" << std::endl;
 
-                cudaError_t _errorCode;
+                //cudaError_t _errorCode;
 
-                _errorCode = cudaMalloc( ( void** ) &m_dev_gpuBuffer, m_bufferSize );
+                /*_errorCode = */cudaMalloc( ( void** ) &m_dev_gpuBuffer, m_bufferSize );
 
-                std::cout << "_errorCode_malloc: " << _errorCode << std::endl;
-                std::cout << "?: buffsize" << m_bufferSize << std::endl;
+                //std::cout << "_errorCode_malloc: " << _errorCode << std::endl;
+                //std::cout << "?: buffsize" << m_bufferSize << std::endl;
 
                 m_type = type::CUDA;
             }
@@ -55,21 +55,22 @@ namespace felix
             LCudaMat( int rows, int cols, int channels, float* pData ) 
                 : LGpuMat( rows, cols, channels, pData )
             {
-                std::cout << "malloc! 2" << std::endl;
+                //std::cout << "malloc! 2" << std::endl;
                 cudaMalloc( ( void** ) &m_dev_gpuBuffer, m_bufferSize );
                 m_type = type::CUDA;
             }
 
             // TODO: Create copy constructors as there might be memory leaks both in gpu and cpu
 
-            void releaseGpuMemory() 
+            void releaseMemory()
             {
-                // TODO: DIP
+                cudaFree( m_dev_gpuBuffer );
+                free( m_host_cpuBuffer );
             }
 
             float* devGpuBuffer() 
             { 
-                std::cout << "m_dev_gpuBuffer: " << m_dev_gpuBuffer << std::endl;
+                //std::cout << "m_dev_gpuBuffer: " << m_dev_gpuBuffer << std::endl;
                 return m_dev_gpuBuffer;
             }
 

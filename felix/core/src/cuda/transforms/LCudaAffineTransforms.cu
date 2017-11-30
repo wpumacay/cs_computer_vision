@@ -143,7 +143,65 @@ namespace felix
             return _res;
         }
 
+        core::LCudaMat LCudaAffineTransforms::scale( core::LCudaMat& lCudaMat,
+                                                     int pDstCols, int pDstRows,
+                                                     float sx, float sy )
+        {
+            float* _matrix3f = new float[9];
 
+            _matrix3f[0] = sx;   _matrix3f[1] = 0.0f; _matrix3f[2] = 0.0f;
+            _matrix3f[3] = 0.0f; _matrix3f[4] = sy;   _matrix3f[5] = 0.0f;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
+
+            cout << "fun" << endl;
+            core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
+            cout << "bar" << endl;
+
+            delete[] _matrix3f;
+
+            return _res;
+        }
+
+        core::LCudaMat LCudaAffineTransforms::rotate( core::LCudaMat& lCudaMat,
+                                                     int pDstCols, int pDstRows,
+                                                     float angle )
+        {
+            float* _matrix3f = new float[9];
+
+            float _c = cos( angle );
+            float _s = sin( angle );
+
+            _matrix3f[0] = _c;   _matrix3f[1] = -_s;  _matrix3f[2] = 0.0f;
+            _matrix3f[3] = _s;   _matrix3f[4] = _c;   _matrix3f[5] = 0.0f;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
+
+            cout << "fun" << endl;
+            core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
+            cout << "bar" << endl;
+
+            delete[] _matrix3f;
+
+            return _res;
+        }
+
+        core::LCudaMat LCudaAffineTransforms::translate( core::LCudaMat& lCudaMat,
+                                                     int pDstCols, int pDstRows,
+                                                     float tx, float ty )
+        {
+            float* _matrix3f = new float[9];
+
+            _matrix3f[0] = 1.0f; _matrix3f[1] = 0.0f; _matrix3f[2] = tx;
+            _matrix3f[3] = 0.0f; _matrix3f[4] = 1.0f; _matrix3f[5] = ty;
+            _matrix3f[6] = 0.0f; _matrix3f[7] = 0.0f; _matrix3f[8] = 1.0f;
+
+            cout << "fun" << endl;
+            core::LCudaMat _res = LCudaAffineTransforms::warpAffine( lCudaMat, pDstCols, pDstRows, _matrix3f );
+            cout << "bar" << endl;
+
+            delete[] _matrix3f;
+
+            return _res;
+        }
 
     }
 

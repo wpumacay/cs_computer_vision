@@ -32,3 +32,17 @@ target_link_libraries( test_visualizer.out
                        ${GTK3_LIBRARIES} 
                        ${CMAKE_THREAD_LIBS_INIT} 
                        ${X11_LIBRARIES} )
+
+add_executable( test_full.out test_full.cpp )
+target_link_libraries( test_full.out 
+                       felix 
+                       ${GTK3_LIBRARIES} 
+                       ${CMAKE_THREAD_LIBS_INIT} 
+                       ${X11_LIBRARIES} )
+
+cuda_add_executable( test_full_gpu.out test_full_gpu.cpp )
+target_link_libraries( test_full_gpu.out 
+                       felix 
+                       ${GTK3_LIBRARIES} 
+                       ${CMAKE_THREAD_LIBS_INIT} 
+                       ${X11_LIBRARIES} )
