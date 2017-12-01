@@ -24,13 +24,13 @@ namespace felix
             GtkImage* m_image;
             string m_name;
 
-
             public :
 
             LWindowGtk();
             LWindowGtk( string wName );
 
             map< string, LFnPtr_trackbar > trackbarCallbacks; 
+            map< string, LFnPtr_button > buttonCallbacks;
             static vector<LWindowGtk*> g_windows;
 
             void show();
@@ -39,9 +39,14 @@ namespace felix
                               int min, int max, 
                               int tick, LFnPtr_trackbar callback ) override;
 
+            void addButton( string bName,
+                            LFnPtr_button callback ) override;
+
             void showImage( u8* buffer, int w, int h, int c ) override;
+            void saveCurrentImage( const char* filename ) override;
 
             static void callbackTrackbars( GtkRange* pTrackbar, gpointer pWin );
+            static void callbackButtons( GtkWidget* pButton, gpointer pData );
         };
 
 

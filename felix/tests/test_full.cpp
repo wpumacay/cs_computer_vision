@@ -16,6 +16,18 @@ felix::core::LMatf g_imgf;
 
 felix::utils::LCpuTimer g_cpuTimer;
 
+void onButtonSaveCallback()
+{
+    cout << "saving transformed images" << endl;
+    felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample rotated" ),
+                                                                 "leo_rotated" );
+    felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample translated" ),
+                                                                 "leo_translated" );
+    felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample scaled" ),
+                                                                 "leo_scaled" );
+    cout << "done" << endl;
+}
+
 void onTrackbarCallbackRotation( float value )
 {
     g_cpuTimer.start();
@@ -102,6 +114,9 @@ int main()
                                                             string( "scale" ),
                                                             50, 200, 1,
                                                             onTrackbarCallbackScale );
+    felix::core::LVisualizerManager::instance->addButton( string( "sample original" ),
+                                                          string( "save" ),
+                                                          onButtonSaveCallback );
 
     felix::core::LVisualizerManager::instance->showMat( "sample rotated",
                                                         *g_img );

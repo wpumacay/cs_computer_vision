@@ -78,6 +78,19 @@ namespace felix
             gtk_widget_show_all( m_window );
         }
 
+        void LWindowGtk::saveCurrentImage( const char* filename )
+        {
+            if ( m_image == NULL )
+            {
+                std::cout << "could not save the image, not defined yet" << std::endl;
+                return;
+            }
+
+            GdkPixbuf* _pbuff = gtk_image_get_pixbuf( m_image );
+            gdk_pixbuf_save( _pbuff, filename, "bmp", NULL, NULL );
+            std::cout << "saved image to: " << filename << std::endl;
+        }
+
         void LWindowGtk::addTrackbar( string tName, 
                                       int min, int max, int tick, 
                                       LFnPtr_trackbar callback )
@@ -85,13 +98,29 @@ namespace felix
             trackbarCallbacks[tName] = callback;
             GtkRange* _trackbar = ( GtkRange* ) gtk_scale_new_with_range( GTK_ORIENTATION_HORIZONTAL, min, max, tick );
             gtk_widget_set_name( ( GtkWidget* ) _trackbar, tName.c_str() );
-            gtk_scale_set_draw_value( GTK_SCALE( _trackbar ), FALSE );
+            gtk_scale_set_draw_value( GTK_SCALE( _trackbar ), TRUE );
             gtk_widget_set_size_request( ( GtkWidget* ) _trackbar, 150, -1 );
 
             gtk_container_add( GTK_CONTAINER( m_frame ), ( GtkWidget* ) _trackbar );
 
             g_signal_connect( _trackbar, "value-changed",
                               G_CALLBACK( LWindowGtk::callbackTrackbars ), NULL );
+
+            gtk_widget_show_all( m_window );
+        }
+
+
+        void LWindowGtk::addButton( string bName,
+                                    LFnPtr_button callback )
+        {
+            buttonCallbacks[bName] = callback;
+            GtkWidget* _button = gtk_button_new_with_label( bName.c_str() );
+            gtk_widget_set_name( _button, bName.c_str() );
+
+            gtk_container_add( GTK_CONTAINER( m_frame ), _button );
+
+            g_signal_connect( _button, "clicked",
+                              G_CALLBACK( LWindowGtk::callbackButtons ), NULL );
 
             gtk_widget_show_all( m_window );
         }
@@ -122,6 +151,30 @@ namespace felix
             }
         }
 
+
+        void LWindowGtk::callbackButtons( GtkWidget* pButton, gpointer _dummy )
+        {
+            vector<LWindowGtk*> _windows = LWindowGtk::g_windows;
+
+            string _tName( gtk_widget_get_name( pButton ) );
+
+            for ( int q = 0; q < _windows.size(); q++ )
+            {
+                map< string, LFnPtr_button > _buttonCallbacks = _windows[q]->buttonCallbacks;
+                map< string, LFnPtr_button >::iterator _it;
+
+                _it = _buttonCallbacks.find( _tName );
+
+                if ( _it != _buttonCallbacks.end() )
+                {
+                    LFnPtr_button _callback = _it->second;
+
+                    _callback();
+                    break;
+                }
+
+            }
+        }
 
     }
 

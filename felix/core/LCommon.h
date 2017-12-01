@@ -22,6 +22,7 @@
 #define CUDA_THREADS_SPLIT_2D 32
 
 typedef void ( *LFnPtr_trackbar )( float value );
+typedef void ( *LFnPtr_button )();
 
 typedef unsigned char u8;
 typedef unsigned short u16;

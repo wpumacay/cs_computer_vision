@@ -83,6 +83,30 @@ namespace felix
                                                    callback );
         }
 
+        void LVisualizerManager::addButton( string wName, string tName,
+                                            LFnPtr_button callback )
+        {
+            if ( m_visualizer == NULL )
+            {
+                std::cout << "LVisualizerManager::addButton> no visualizer initialized" << std::endl;
+                return;
+            }            
+
+            m_visualizer->requestButtonCreation( wName, tName,
+                                                 callback );
+        }
+
+        void LVisualizerManager::saveCurrentImage( string wName, const char* filename )
+        {
+            if ( m_visualizer == NULL )
+            {
+                std::cout << "LVisualizerManager::saveCurrentImage> no visualizer initialized" << std::endl;
+                return;
+            }            
+
+            m_visualizer->requestSaveCurrentImage( wName, filename );
+        }
+
         void LVisualizerManager::show()
         {
             if ( m_visualizer == NULL )

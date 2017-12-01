@@ -46,9 +46,20 @@ namespace felix
                 // Override this
             }
 
+            virtual void requestSaveCurrentImage( string wName, const char* filename )
+            {
+                // Override this
+            }
+
             virtual void requestTrackbarCreation( string wName, string tName,
                                                   int min, int max, int tick, 
                                                   LFnPtr_trackbar callback )
+            {
+                // Override this
+            }
+
+            virtual void requestButtonCreation( string wName, string bName,
+                                                LFnPtr_button callback )
             {
                 // Override this
             }

@@ -40,6 +40,11 @@ namespace felix
                               int min, int max, int tick, 
                               LFnPtr_trackbar callback );
 
+            void addButton( string wName, string tName,
+                            LFnPtr_button callback );
+
+            void saveCurrentImage( string wName, const char* filename );
+
             void show();
 
         };

@@ -44,11 +44,22 @@ namespace felix
             m_windows[swName]->showImage( buffer, width, height, channels );
         }
         
+        void LVisualizerGtk::requestSaveCurrentImage( string wName, const char* filename )
+        {
+            m_windows[wName]->saveCurrentImage( filename );
+        }
+
         void LVisualizerGtk::requestTrackbarCreation( string wName, string tName,
                                                       int min, int max, int tick, 
                                                       LFnPtr_trackbar callback ) 
         {
             m_windows[wName]->addTrackbar( tName, min, max, tick, callback );
+        }
+
+        void LVisualizerGtk::requestButtonCreation( string wName, string tName,
+                                                    LFnPtr_button callback ) 
+        {
+            m_windows[wName]->addButton( tName, callback );
         }
 
         void LVisualizerGtk::showAll()
