@@ -20,11 +20,11 @@ void onButtonSaveCallback()
 {
     cout << "saving transformed images" << endl;
     felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample rotated" ),
-                                                                 "leo_rotated" );
+                                                                 "leo_rotated.bmp" );
     felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample translated" ),
-                                                                 "leo_translated" );
+                                                                 "leo_translated.bmp" );
     felix::core::LVisualizerManager::instance->saveCurrentImage( string( "sample scaled" ),
-                                                                 "leo_scaled" );
+                                                                 "leo_scaled.bmp" );
     cout << "done" << endl;
 }
 

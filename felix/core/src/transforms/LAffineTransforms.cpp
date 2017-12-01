@@ -39,9 +39,55 @@ namespace felix
         }
 
         float LAffineTransforms::_interpolate_bl( const core::LMatf& lmat,
-                                                  float fx, float fy, int channel )
+                                                  float fx_c, float fy_c, int pChannel )
         {
-            return 0.0f;
+            float _fx = fx_c + 0.5 * lmat.cols();
+            float _fy = 0.5 * lmat.rows() - fy_c;
+
+            if ( _fx < 0 || _fx >= lmat.cols() ||
+                 _fy < 0 || _fy >= lmat.rows() )
+            {
+                return 0.0f;
+            }
+
+
+            int _loX = floor( _fx ); _loX = max( min( _loX, lmat.cols() ), 0 );
+            int _hiX = ceil( _fx ); _hiX = max( min( _hiX, lmat.cols() ), 0 );
+
+            int _loY = floor( _fy ); _loY = max( min( _loY, lmat.rows() ), 0 );
+            int _hiY = ceil( _fy ); _hiY = max( min( _hiY, lmat.rows() ), 0 );
+
+            float _valX_lo;
+            float _valX_hi;
+
+            if ( _hiX != _loX )
+            {
+                _valX_lo = ( _fx - _loX ) / ( _hiX - _loX ) * lmat.get( _hiX, _loY, pChannel ) +
+                           ( _hiX - _fx ) / ( _hiX - _loX ) * lmat.get( _loX, _loY, pChannel );
+
+                _valX_hi = ( _fx - _loX ) / ( _hiX - _loX ) * lmat.get( _hiX, _hiY, pChannel ) +
+                           ( _hiX - _fx ) / ( _hiX - _loX ) * lmat.get( _loX, _hiY, pChannel );
+            }
+            else
+            {
+                _valX_lo = lmat.get( _hiX, _loY, pChannel );
+                _valX_hi = lmat.get( _hiX, _hiY, pChannel );
+            }
+
+            float _val;
+
+            if ( _hiY != _loY )
+            {
+                _val = ( _fy - _loY ) / ( _hiY - _loY ) * _valX_hi +
+                       ( _hiY - _fy ) / ( _hiY - _loY ) * _valX_lo;
+            }
+            else
+            {
+                _val = _valX_hi;
+            }
+
+
+            return _val;
         }
 
         float LAffineTransforms::_interpolate_bc( const core::LMatf& lmat,
@@ -105,7 +151,7 @@ namespace felix
                         float _y = _c12 * _xc + _c22 * _yc + _c32;
 
                         // 3. Apply interpolation of the pixel at _x, _y in the src image
-                        float _v = LAffineTransforms::_interpolate_nn( lmat, _x, _y, k );
+                        float _v = LAffineTransforms::_interpolate_bl( lmat, _x, _y, k );
 
                         _res( x, y, k, _v );
                     }
