@@ -3,11 +3,15 @@ project( felix )
 
 set( CMAKE_BUILD_TYPE Debug )
 
+set( CMAKE_C_COMPILER /usr/bin/gcc-6 )
+set( CMAKE_CXX_COMPILER /usr/bin/g++-6 )
+
 set( CMAKE_CXX_STANDARD 11 )
 set( CMAKE_CXX_FLAGS_DEBUG "-g -Wno-unused-parameter" )
 
 find_package( CUDA )
 find_package( OpenCL )
+find_package( JPEG )
 find_package( OpenMP )
 #find_package( Threads REQUIRED ) # testing gtk with threads
 find_package( PkgConfig REQUIRED )
@@ -54,6 +58,17 @@ message( "NO VISUALIZATION SUPPORT FOUND, SORRY :(" )
 
 endif()
 
+if ( JPEG_FOUND )
+
+	message( "JPEG SUPPORT FOUND" )
+
+else()
+
+	message( "NO JPEG SUPPORT :(" )
+
+endif()
+
 add_subdirectory( core )
 add_subdirectory( tests )
+add_subdirectory( qt/felixVis )
 

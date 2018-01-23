@@ -88,18 +88,43 @@ namespace felix
                 m_buffer[ m_channels * _pixIndx + c ] = v;
             }
 
-            float operator() ( int col, int row, int channel )
+            void set ( int col, int row, int c, T v )
+            {
+                int _pixIndx = col + row * m_cols;
+
+                m_buffer[ m_channels * _pixIndx + c ] = v;
+            }
+
+            T operator() ( int col, int row, int channel )
             {
                 int _pixIndx = col + row * m_cols;
 
                 return m_buffer[ m_channels * _pixIndx + channel ];
             }
 
-            float get ( int col, int row, int channel ) const
+            T get ( int col, int row, int channel ) const
             {
                 int _pixIndx = col + row * m_cols;
 
                 return m_buffer[ m_channels * _pixIndx + channel ];
+            }
+
+            void stretch( T mMin, T mMax, T limitMin, T limitMax )
+            {
+                for ( int _row = 0; _row < m_rows; _row++ )
+                {
+                    for ( int _col = 0; _col < m_cols; _col++ )
+                    {
+                        int _pixIndx = _col + _row * m_cols;
+
+                        for ( int _channel = 0; _channel < m_channels; _channel++ )
+                        {
+                            T _val = m_buffer[ m_channels * _pixIndx + _channel ];
+
+                            _val = limitMin + ( limitMax - limitMin ) * ( _val - mMin ) / ( mMax - mMin );
+                        }
+                    }
+                }
             }
 
             void dump( int cutoff = 300 )
@@ -205,9 +230,59 @@ namespace felix
             return _res;
         }
 
+        template<class T>
+        LMat<T> gray2rgb( const LMat<T>& img )
+        {
+            LMat<T> _res( img.rows(), img.cols(), 3 );
+
+            int _nPixels = _res.size();
+            
+            T* _imgBuff = img.buffer();
+            T* _resBuff = _res.buffer();
+
+            for ( int q = 0; q < _nPixels; q++ )
+            {
+                _resBuff[ 3 * q + 0 ] = _imgBuff[q];
+                _resBuff[ 3 * q + 1 ] = _imgBuff[q];
+                _resBuff[ 3 * q + 2 ] = _imgBuff[q];
+            }
+
+            return _res;            
+        }
 
         typedef LMat<u8> LMatu;
         typedef LMat<float> LMatf;
+
+
+        template<class T>
+        LMat<T> makeNoiseSaltPepper( int w, int h, int c, float percent, T vmax )
+        {
+            LMat<T> _res( h, w, c );
+
+            int _nPixels = _res.size();
+
+            T* _resBuff = _res.buffer();
+
+            for ( int q = 0; q < _nPixels; q++ )
+            {
+                if ( RANDOM() < percent )
+                {
+                    for ( int _ch = 0; _ch < c; _ch++ )
+                    {
+                        _resBuff[ c * q + _ch ] = vmax;
+                    }
+                }
+                else
+                {
+                    for ( int _ch = 0; _ch < c; _ch++ )
+                    {
+                        _resBuff[ c * q + _ch ] = 0;
+                    }
+                }
+            }
+
+            return _res;
+        }
 
     }
 

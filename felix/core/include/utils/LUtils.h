@@ -18,6 +18,8 @@ namespace felix
 
         LMatf toMatf( const LMatu& img );
         LMatu toMatu( const LMatf& img );
+        void addMats( LMatf& dst, const LMatf& other );
+        void addNoiseSaltPepper( LMatf& lmat, float percent );
 
         /** based in this post 
         *   https://stackoverflow.com/questions/17665314/c-get-elapsed-time-platform-independent 

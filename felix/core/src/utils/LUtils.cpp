@@ -51,8 +51,65 @@ namespace felix
             return _res;
         }
 
+        void addMats( LMatf& dst, const LMatf& other )
+        {
+            if ( dst.cols() != other.cols() ||
+                 dst.rows() != other.rows() ||
+                 dst.channels() != other.channels() )
+            {
+                cout << "addMats> dimensions mismatch" << endl;
+                return;
+            }
 
+            float* _dstBuff = dst.buffer();
+            float* _oBuff = other.buffer();
 
+            int _w = dst.cols();
+            int _h = dst.rows();
+            int _c = dst.channels();
+
+            for ( int i = 0; i < _h; i++ )
+            {
+                for ( int j = 0; j < _w; j++ )
+                {
+                    for ( int _ch = 0; _ch < _c; _ch++ )
+                    {
+                        int _p = j + i * _w;
+
+                        _dstBuff[ _c * _p + _ch ] += _oBuff[ _c * _p + _ch ];
+                        _dstBuff[ _c * _p + _ch ] = max( min( _dstBuff[ _c * _p + _ch ], 1.0f ), 0.0f );
+                    }
+                }
+            }
+        }
+
+        void addNoiseSaltPepper( LMatf& lmat, float percent )
+        {
+            int _nPixels = lmat.size();
+
+            float* _buff = lmat.buffer();
+
+            for ( int q = 0; q < _nPixels; q++ )
+            {
+                if ( RANDOM() < percent )
+                {
+                    if ( RANDOM() < 0.5 )
+                    {
+                        for ( int _ch = 0; _ch < lmat.channels(); _ch++ )
+                        {
+                            _buff[ lmat.channels() * q + _ch ] = 1.0f;
+                        }
+                    }
+                    else
+                    {
+                        for ( int _ch = 0; _ch < lmat.channels(); _ch++ )
+                        {
+                            _buff[ lmat.channels() * q + _ch ] = 0.0f;
+                        }
+                    }
+                }
+            }
+        }
 
     }
 

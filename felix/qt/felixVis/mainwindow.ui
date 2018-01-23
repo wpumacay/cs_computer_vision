@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="qActionOpen"/>
+    <addaction name="qActionSave"/>
+    <addaction name="separator"/>
+    <addaction name="qActionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Transforms">
+    <property name="title">
+     <string>&amp;Transforms</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="qActionAffine"/>
+    <addaction name="qActionPerspective"/>
+   </widget>
+   <widget class="QMenu" name="menu_ImgProc">
+    <property name="title">
+     <string>&amp;ImgProc</string>
+    </property>
+    <addaction name="qActionConvolution"/>
+    <addaction name="qActionHistEqualization"/>
+    <addaction name="qActionMedianFilter"/>
+    <addaction name="separator"/>
+    <addaction name="qActionFourier"/>
+   </widget>
+   <widget class="QMenu" name="menu_ML">
+    <property name="title">
+     <string>&amp;ML</string>
+    </property>
+    <addaction name="qActionStyleTransfer"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Transforms"/>
+   <addaction name="menu_ImgProc"/>
+   <addaction name="menu_ML"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="qActionOpen">
+   <property name="text">
+    <string>&amp;Open Image</string>
+   </property>
+  </action>
+  <action name="qActionSave">
+   <property name="text">
+    <string>&amp;Save Image</string>
+   </property>
+  </action>
+  <action name="qActionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="qActionAffine">
+   <property name="text">
+    <string>&amp;Affine</string>
+   </property>
+  </action>
+  <action name="qActionConvolution">
+   <property name="text">
+    <string>&amp;Convolution</string>
+   </property>
+  </action>
+  <action name="qActionHistEqualization">
+   <property name="text">
+    <string>&amp;Hist equalization</string>
+   </property>
+  </action>
+  <action name="qActionMedianFilter">
+   <property name="text">
+    <string>&amp;MedFilter</string>
+   </property>
+  </action>
+  <action name="qActionFourier">
+   <property name="text">
+    <string>&amp;Fourier</string>
+   </property>
+  </action>
+  <action name="qActionStyleTransfer">
+   <property name="text">
+    <string>&amp;StyleTransfer</string>
+   </property>
+  </action>
+  <action name="qActionPerspective">
+   <property name="text">
+    <string>&amp;Perspective</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

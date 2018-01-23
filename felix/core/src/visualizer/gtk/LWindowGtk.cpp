@@ -54,7 +54,6 @@ namespace felix
 
         void LWindowGtk::showImage( u8* buffer, int w, int h, int c )
         {
-
             int _buffSize = w * h * c;
             GBytes* _buff = g_bytes_new( buffer, 
                                          sizeof( unsigned char ) * _buffSize );

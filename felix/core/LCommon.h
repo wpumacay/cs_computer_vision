@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <cstdlib>
 #include <map>
 #include <algorithm>
 #include <cstring>
@@ -20,6 +21,9 @@
 
 #define CUDA_MAX_THREADS_PER_BLOCK 1024
 #define CUDA_THREADS_SPLIT_2D 32
+#define _PI 3.141592653589793
+
+#define RANDOM() ( ( float )rand() ) / RAND_MAX
 
 typedef void ( *LFnPtr_trackbar )( float value );
 typedef void ( *LFnPtr_button )();
@@ -61,6 +65,58 @@ struct LPixelRGB
         r = 0;
         g = 0;
         b = 0;
+    }
+};
+
+struct LVec2
+{
+    float x;
+    float y;
+
+    LVec2()
+    {
+        x = 0;
+        y = 0;
+    }
+
+    LVec2( float x, float y )
+    {
+        this->x = x;
+        this->y = y;
+    }
+
+    LVec2 operator + ( const LVec2& other )
+    {
+        return LVec2( this->x + other.x,
+                      this->y + other.y );
+    }
+
+    LVec2 operator - ( const LVec2& other )
+    {
+        return LVec2( this->x - other.x,
+                      this->y - other.y );
+    }
+
+    void operator * ( float val )
+    {
+        this->x *= val;
+        this->y *= val;
+    }
+
+    void scale( float val )
+    {
+        this->x *= val;
+        this->y *= val;
+    }
+
+    float length()
+    {
+        return sqrt( x * x + y * y );
+    }
+
+    float phase()
+    {
+        return atan2( y, x );
     }
 };
 
