@@ -7,6 +7,8 @@
 #include <QPixmap>
 
 #include <windowWidgets/LRenderArea.h>
+
+#include <ui/lpanelconvolution.h>
 #include <ui/lpanelaffinetransforms.h>
 
 namespace Ui 
@@ -17,6 +19,7 @@ namespace Ui
 namespace felix {
 namespace qt {
 
+    class LPanelConvolution;
     class LPanelAffineTransforms;
 
     class LMainWindow : public QMainWindow
@@ -30,12 +33,17 @@ namespace qt {
         void slotQuit();
         
         void slotAffine();
+        
+        void slotConvolution();
 
         private:
 
         Ui::MainWindow *ui;
 
         LRenderArea* m_renderArea;
+
+        LPanelConvolution* m_panelConvolution;
+        LPanelAffineTransforms* m_panelAffineTransforms;
 
         void _setupActions();
 

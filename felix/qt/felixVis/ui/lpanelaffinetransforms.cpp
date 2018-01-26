@@ -2,16 +2,15 @@
 #include "lpanelaffinetransforms.h"
 #include "ui_lpanelaffinetransforms.h"
 
-#include <qtWrappers/LWrapperAffineTransforms.h>
-
 #include <iostream>
+#include <cassert>
 
 namespace felix {
 namespace qt {
 
 
-    LPanelAffineTransforms::LPanelAffineTransforms( LMainWindow* parent ) :
-        QDialog(parent),
+    LPanelAffineTransforms::LPanelAffineTransforms() :
+        QDialog( NULL ),
         ui( new Ui::LPanelAffineTransforms )
     {
         ui->setupUi( this );
@@ -20,12 +19,15 @@ namespace qt {
         _setupSignals();
         
         show();
+
+        m_masterWindow = NULL;
         
         // std::cout << "created affine transforms panel" << std::endl;
     }
 
     LPanelAffineTransforms::~LPanelAffineTransforms()
     {
+        // std::cout << "destroyed affine transforms panel" << std::endl;
         delete ui;
     }
 
@@ -51,49 +53,54 @@ namespace qt {
 
     void LPanelAffineTransforms::slotOnRotation( int angle )
     {
-        auto _masterWindow = reinterpret_cast<LMainWindow*>( this->parentWidget() );
-        
-        QImage _srcImage = _masterWindow->requestRenderImage();
+        assert( m_masterWindow != NULL );
+
+        QImage _srcImage = m_masterWindow->requestRenderImage();
         QImage _dstImage = fRotationTransform( _srcImage, (float) angle );
 
-        _masterWindow->setRenderImage( _dstImage );
+        m_masterWindow->setRenderImage( _dstImage );
     }
     
     void LPanelAffineTransforms::slotOnTranslationX( int dx )
     {
-        auto _masterWindow = reinterpret_cast<LMainWindow*>( this->parentWidget() );
-        
-        QImage _srcImage = _masterWindow->requestRenderImage();
+        assert( m_masterWindow != NULL );
+
+        QImage _srcImage = m_masterWindow->requestRenderImage();
         QImage _dstImage = fTranslationTransform( _srcImage, 
                                                   (float) dx,
                                                   ui->mSliderTranslationY->value() );
 
-        _masterWindow->setRenderImage( _dstImage );        
+        m_masterWindow->setRenderImage( _dstImage );        
     }
     
     void LPanelAffineTransforms::slotOnTranslationY( int dy )
     {
-        auto _masterWindow = reinterpret_cast<LMainWindow*>( this->parentWidget() );
-        
-        QImage _srcImage = _masterWindow->requestRenderImage();
+        assert( m_masterWindow != NULL );
+
+        QImage _srcImage = m_masterWindow->requestRenderImage();
         QImage _dstImage = fTranslationTransform( _srcImage, 
                                                   ui->mSliderTranslationX->value(),
                                                   (float) dy );
 
-        _masterWindow->setRenderImage( _dstImage );                
+        m_masterWindow->setRenderImage( _dstImage );                
     }
     
     void LPanelAffineTransforms::slotOnScale( int scalePercent )
     {
-        auto _masterWindow = reinterpret_cast<LMainWindow*>( this->parentWidget() );
-        
-        float _scale = ( (float)scalePercent ) / 100.0f;
-        std::cout << "_scale" << _scale << std::endl;
+        assert( m_masterWindow != NULL );
 
-        QImage _srcImage = _masterWindow->requestRenderImage();
+        float _scale = ( (float)scalePercent ) / 100.0f;
+        // std::cout << "_scale" << _scale << std::endl;
+
+        QImage _srcImage = m_masterWindow->requestRenderImage();
         QImage _dstImage = fScaleTransform( _srcImage, _scale );
 
-        _masterWindow->setRenderImage( _dstImage );                        
+        m_masterWindow->setRenderImage( _dstImage );                        
+    }
+
+    void LPanelAffineTransforms::setMasterWindow( LMainWindow* pMasterWindow )
+    {
+        m_masterWindow = pMasterWindow;
     }
     
 }}

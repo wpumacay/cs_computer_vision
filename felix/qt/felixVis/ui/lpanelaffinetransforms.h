@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <mainwindow.h>
+#include <qtWrappers/LWrapperAffineTransforms.h>
 
 namespace Ui 
 {
@@ -28,11 +29,15 @@ namespace qt {
         
         public:
 
-        explicit LPanelAffineTransforms( LMainWindow* parent );
+        explicit LPanelAffineTransforms();
         ~LPanelAffineTransforms();
         
+        void setMasterWindow( LMainWindow* pMasterWindow );
+
         private:
         
+        LMainWindow* m_masterWindow;
+
         void _setupSignals();
         void _setupRanges();
 

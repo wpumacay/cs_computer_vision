@@ -28,13 +28,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     src/windowWidgets/LRenderArea.cpp \
-    ui/lpanelaffinetransforms.cpp
+    ui/lpanelaffinetransforms.cpp \
+    ui/lpanelconvolution.cpp
 
 HEADERS += \
         mainwindow.h \
     include/windowWidgets/LRenderArea.h \
-    ui/lpanelaffinetransforms.h
+    ui/lpanelaffinetransforms.h \
+    ui/lpanelconvolution.h
 
 FORMS += \
         mainwindow.ui \
-    ui/lpanelaffinetransforms.ui
+    ui/lpanelaffinetransforms.ui \
+    ui/lpanelconvolution.ui

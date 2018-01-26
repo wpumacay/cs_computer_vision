@@ -48,8 +48,28 @@ namespace qt {
         m_renderArea->update();
 
         _setupActions();
+
+        m_panelAffineTransforms = NULL;
+        m_panelConvolution = NULL;
     }
 
+    LMainWindow::~LMainWindow()
+    {
+        if ( m_panelAffineTransforms != NULL )
+        {
+            delete m_panelAffineTransforms;
+            m_panelAffineTransforms = NULL;
+        }
+
+        if ( m_panelConvolution != NULL )
+        {
+            delete m_panelConvolution;
+            m_panelConvolution = NULL;
+        }
+
+        delete ui;
+    }
+    
     void LMainWindow::_setupActions()
     {
         connect( ui->qActionOpen, &QAction::triggered, this, &LMainWindow::slotOpen );
@@ -57,6 +77,7 @@ namespace qt {
         connect( ui->qActionQuit, &QAction::triggered, this, &LMainWindow::slotQuit );
 
         connect( ui->qActionAffine, &QAction::triggered, this, &LMainWindow::slotAffine );
+        connect( ui->qActionConvolution, &QAction::triggered, this, &LMainWindow::slotConvolution );
 
     }
 
@@ -100,17 +121,27 @@ namespace qt {
 
     void LMainWindow::slotAffine()
     {
-        std::cout << "???? affine transform panel" << std::endl;
-        
-        new LPanelAffineTransforms( this );
+        if ( m_panelAffineTransforms != NULL )
+        {
+            m_panelAffineTransforms->show();
+            return;
+        }
+
+        m_panelAffineTransforms = new LPanelAffineTransforms();
+        m_panelAffineTransforms->setMasterWindow( this );
     }
-    
-    LMainWindow::~LMainWindow()
+
+    void LMainWindow::slotConvolution()
     {
-        delete ui;
+        if ( m_panelConvolution != NULL )
+        {
+            m_panelConvolution->show();
+            return;
+        }
+
+        m_panelConvolution = new LPanelConvolution( NULL );
+        m_panelConvolution->setMasterWindow( this );
     }
-
-
 
 
 
