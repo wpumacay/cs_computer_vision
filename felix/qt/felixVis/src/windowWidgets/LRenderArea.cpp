@@ -106,4 +106,14 @@ namespace qt {
         return m_workingImage->copy();
     }
 
+    QImage LRenderArea::getShowingImage()
+    {
+        if ( m_showImage == NULL )
+        {
+            return QImage();
+        }
+
+        return m_showImage->copy();
+    }
+
 }}

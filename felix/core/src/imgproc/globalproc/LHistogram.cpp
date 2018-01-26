@@ -74,28 +74,34 @@ namespace felix
 
     // Histogram helper methods **************************
 
-    LHist LHistogram::_computeHistogram( const core::LMatu& lmat )
+    LHist LHistogram::_computeHistogram( const core::LMatu& lmat, int channel )
     {
         LHist _hist;
 
-        if ( lmat.channels() > 1 )
+        if ( channel > lmat.channels() - 1 )
         {
-            cout << "LHistogram::_computeHistogram> only single channel images supported" << endl;
+            cout << "LHistogram::_computeHistogram> requested out of range channel" << endl;
             return _hist;
         }
+
+        // if ( lmat.channels() > 1 )
+        // {
+        //     cout << "LHistogram::_computeHistogram> only single channel images supported" << endl;
+        //     return _hist;
+        // }
 
         for ( int i = 0; i < lmat.rows(); i++ )
         {
             for ( int j = 0; j < lmat.cols(); j++ )
             {
-                _hist.h[lmat.get( j, i, 0 )] += 1;
+                _hist.h[lmat.get( j, i, channel )] += 1;
             }
         }
 
         return _hist;
     }
 
-    LHistTransform LHistogram::_computeHistTransform( const LHist& hist )
+    LHistTransform LHistogram::_computeHistTransform( const LHist& hist, int channel )
     {
         LHist _cumHist;
 
@@ -113,8 +119,32 @@ namespace felix
 
     core::LMatu LHistogram::equalize( const core::LMatu& lmat )
     {
-        LHist _hist = LHistogram::_computeHistogram( lmat );
-        LHistTransform _transform = LHistogram::_computeHistTransform( _hist );
+        LHist _totalHist;
+
+        for ( int q = 0; q < lmat.channels(); q++ )
+        {
+            if ( q == 3 )
+            {
+                // Dont compute for alpha channel
+                continue;
+            }
+
+            LHist _hist = LHistogram::_computeHistogram( lmat, q );
+            
+            for ( int b = 0; b < HISTOGRAM_BIN_SIZE; b++ )
+            {
+                _totalHist.h[b] += _hist.h[b];
+            }
+
+        }
+
+        for ( int b = 0; b < HISTOGRAM_BIN_SIZE; b++ )
+        {
+            _totalHist.h[b] = _totalHist.h[b] / 3;
+        }
+
+        //LHist _hist = LHistogram::_computeHistogram( lmat );
+        LHistTransform _transform = LHistogram::_computeHistTransform( _totalHist );
 
         core::LMatu _res( lmat.rows(), lmat.cols(), lmat.channels() );
 

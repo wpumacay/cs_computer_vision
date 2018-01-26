@@ -2,6 +2,10 @@
 
 #include "../../../include/imgproc/localproc/LConvolution.h"
 
+#include <cstring>
+#include <iomanip>
+#include <iostream>
+
 using namespace std;
 
 namespace felix
@@ -19,6 +23,29 @@ namespace felix
         m_buffer = new float[ cols * rows ];
         m_rows = rows;
         m_cols = cols;
+    }
+
+    LConvKernel::LConvKernel( const LConvKernel& other )
+    {
+        m_buffer = new float[ other.m_cols * other.m_rows ];
+        m_rows = other.m_rows;
+        m_cols = other.m_cols;
+
+        memcpy( m_buffer, other.m_buffer, sizeof( float ) * m_rows * m_cols );
+    }
+
+    void LConvKernel::operator= ( const LConvKernel& other )
+    {
+        if ( m_buffer != NULL )
+        {
+            delete m_buffer;
+        }
+
+        m_buffer = new float[ other.m_cols * other.m_rows ];
+        m_rows = other.m_rows;
+        m_cols = other.m_cols;
+
+        memcpy( m_buffer, other.m_buffer, sizeof( float ) * m_rows * m_cols );
     }
 
     LConvKernel::~LConvKernel()
@@ -60,6 +87,34 @@ namespace felix
         m_buffer[ col + m_cols * row ] = value;
     }
 
+    void LConvKernel::print()
+    {
+        std::cout << "[ ";
+
+        for ( int p = 0; p < m_rows; p++ )
+        {
+            std::cout << "[ ";
+
+            for ( int q = 0; q < m_cols; q++ )
+            {
+                std::cout << std::setprecision( 5 ) << m_buffer[ q + p * m_cols ];
+
+                if ( q != m_cols - 1 )
+                {
+                    std::cout  << ", ";
+                }
+            }
+
+            std::cout << "]";
+
+            if ( p != m_rows - 1 )
+            {
+                std::cout << "," << std::endl << "  ";
+            }
+        }
+
+        std::cout << "]" << std::endl;
+    }
 
     LConvKernel makeKernelAverage( int cols, int rows )
     {

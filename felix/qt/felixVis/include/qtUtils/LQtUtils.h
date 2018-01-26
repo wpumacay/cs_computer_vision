@@ -18,7 +18,7 @@ namespace qt {
 
     core::LMatf qImage2mat( QImage image );
     
-    QImage mat2qImage( core::LMatf mat );
+    QImage mat2qImage( const core::LMatf& mat );
 
 
 }}

@@ -29,15 +29,24 @@ SOURCES += \
         mainwindow.cpp \
     src/windowWidgets/LRenderArea.cpp \
     ui/lpanelaffinetransforms.cpp \
-    ui/lpanelconvolution.cpp
+    ui/lpanelconvolution.cpp \
+    ui/lpanelhistogramequalization.cpp \
+    ui/lpanelmedianfilter.cpp \
+    ui/lpanelfouriertransform.cpp
 
 HEADERS += \
         mainwindow.h \
     include/windowWidgets/LRenderArea.h \
     ui/lpanelaffinetransforms.h \
-    ui/lpanelconvolution.h
+    ui/lpanelconvolution.h \
+    ui/lpanelhistogramequalization.h \
+    ui/lpanelmedianfilter.h \
+    ui/lpanelfouriertransform.h
 
 FORMS += \
         mainwindow.ui \
     ui/lpanelaffinetransforms.ui \
-    ui/lpanelconvolution.ui
+    ui/lpanelconvolution.ui \
+    ui/lpanelhistogramequalization.ui \
+    ui/lpanelmedianfilter.ui \
+    ui/lpanelfouriertransform.ui

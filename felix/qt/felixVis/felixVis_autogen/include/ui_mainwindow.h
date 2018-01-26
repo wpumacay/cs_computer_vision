@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.2
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -117,21 +117,21 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        qActionOpen->setText(QApplication::translate("MainWindow", "&Open Image", 0));
-        qActionSave->setText(QApplication::translate("MainWindow", "&Save Image", 0));
-        qActionQuit->setText(QApplication::translate("MainWindow", "&Quit", 0));
-        qActionAffine->setText(QApplication::translate("MainWindow", "&Affine", 0));
-        qActionConvolution->setText(QApplication::translate("MainWindow", "&Convolution", 0));
-        qActionHistEqualization->setText(QApplication::translate("MainWindow", "&Hist equalization", 0));
-        qActionMedianFilter->setText(QApplication::translate("MainWindow", "&MedFilter", 0));
-        qActionFourier->setText(QApplication::translate("MainWindow", "&Fourier", 0));
-        qActionStyleTransfer->setText(QApplication::translate("MainWindow", "&StyleTransfer", 0));
-        qActionPerspective->setText(QApplication::translate("MainWindow", "&Perspective", 0));
-        menu_File->setTitle(QApplication::translate("MainWindow", "&File", 0));
-        menu_Transforms->setTitle(QApplication::translate("MainWindow", "&Transforms", 0));
-        menu_ImgProc->setTitle(QApplication::translate("MainWindow", "&ImgProc", 0));
-        menu_ML->setTitle(QApplication::translate("MainWindow", "&ML", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        qActionOpen->setText(QApplication::translate("MainWindow", "&Open Image", nullptr));
+        qActionSave->setText(QApplication::translate("MainWindow", "&Save Image", nullptr));
+        qActionQuit->setText(QApplication::translate("MainWindow", "&Quit", nullptr));
+        qActionAffine->setText(QApplication::translate("MainWindow", "&Affine", nullptr));
+        qActionConvolution->setText(QApplication::translate("MainWindow", "&Convolution", nullptr));
+        qActionHistEqualization->setText(QApplication::translate("MainWindow", "&Hist equalization", nullptr));
+        qActionMedianFilter->setText(QApplication::translate("MainWindow", "&MedFilter", nullptr));
+        qActionFourier->setText(QApplication::translate("MainWindow", "&Fourier", nullptr));
+        qActionStyleTransfer->setText(QApplication::translate("MainWindow", "&StyleTransfer", nullptr));
+        qActionPerspective->setText(QApplication::translate("MainWindow", "&Perspective", nullptr));
+        menu_File->setTitle(QApplication::translate("MainWindow", "&File", nullptr));
+        menu_Transforms->setTitle(QApplication::translate("MainWindow", "&Transforms", nullptr));
+        menu_ImgProc->setTitle(QApplication::translate("MainWindow", "&ImgProc", nullptr));
+        menu_ML->setTitle(QApplication::translate("MainWindow", "&ML", nullptr));
     } // retranslateUi
 
 };

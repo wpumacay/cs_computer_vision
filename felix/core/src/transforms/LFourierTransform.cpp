@@ -133,7 +133,7 @@ namespace felix
 
         }
 
-        LFourierTransform2D dft( const core::LMatf& lmat )
+        LFourierTransform2D dft( core::LMatf lmat )
         {
             LFourierTransform2D _res( lmat.cols(), lmat.rows() );
 
@@ -175,7 +175,7 @@ namespace felix
 
                     auto _val = ft.get( _u, _v );
 
-                    _res.set( _vp, _up, _val );
+                    _res.set( _up, _vp, _val );
                 }
             }
 

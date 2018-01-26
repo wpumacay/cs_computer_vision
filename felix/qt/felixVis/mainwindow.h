@@ -10,6 +10,9 @@
 
 #include <ui/lpanelconvolution.h>
 #include <ui/lpanelaffinetransforms.h>
+#include <ui/lpanelhistogramequalization.h>
+#include <ui/lpanelmedianfilter.h>
+#include <ui/lpanelfouriertransform.h>
 
 namespace Ui 
 {
@@ -21,6 +24,9 @@ namespace qt {
 
     class LPanelConvolution;
     class LPanelAffineTransforms;
+    class LPanelHistogramEqualization;
+    class LPanelMedianFilter;
+    class LPanelFourierTransform;
 
     class LMainWindow : public QMainWindow
     {
@@ -33,8 +39,10 @@ namespace qt {
         void slotQuit();
         
         void slotAffine();
-        
         void slotConvolution();
+        void slotHistEqualization();
+        void slotMedianFilter();
+        void slotFourierTransform();
 
         private:
 
@@ -44,6 +52,9 @@ namespace qt {
 
         LPanelConvolution* m_panelConvolution;
         LPanelAffineTransforms* m_panelAffineTransforms;
+        LPanelHistogramEqualization* m_panelHistogramEqualization;
+        LPanelMedianFilter* m_panelMedianFilter;
+        LPanelFourierTransform* m_panelFourierTransform;
 
         void _setupActions();
 
@@ -52,7 +63,7 @@ namespace qt {
         explicit LMainWindow( QWidget *parent = 0 );
         ~LMainWindow();
         
-        QImage requestRenderImage();
+        QImage requestRenderImage( bool requestedWorkingImage = true );
         void setRenderImage( QImage image );
     };
 

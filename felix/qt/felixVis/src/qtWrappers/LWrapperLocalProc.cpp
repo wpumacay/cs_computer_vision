@@ -20,5 +20,23 @@ namespace qt {
         return mat2qImage( _dstMat );
     }
 
+    QImage fMedianFilter( QImage img, int maskSize )
+    {
+        core::LMatf _srcMat = qImage2mat( img );
+
+        core::LMatf _dstMat = medianFilter( _srcMat, maskSize, maskSize );
+
+        return mat2qImage( _dstMat );
+    }
+
+    QImage fApplyNoise( QImage img )
+    {
+        core::LMatf _srcMat = qImage2mat( img );
+
+        utils::addNoiseSaltPepper( _srcMat, 0.1 );
+
+        return mat2qImage( _srcMat );
+    }
+
 
 }}

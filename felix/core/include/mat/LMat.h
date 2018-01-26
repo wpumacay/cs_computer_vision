@@ -3,6 +3,8 @@
 
 #include "../../LCommon.h"
 
+#include <cstring>
+
 using namespace std;
 
 namespace felix
@@ -71,6 +73,42 @@ namespace felix
                 }
             }
 
+            LMat( const LMat& other )
+            {
+                m_buffer = new T[ other.m_rows * other.m_cols * other.m_channels];
+                m_rows = other.m_rows;
+                m_cols = other.m_cols;
+                m_size = other.m_rows * other.m_cols;
+                m_channels = other.m_channels;
+
+                memcpy( m_buffer, other.m_buffer, sizeof( T ) * m_rows * m_cols * m_channels );
+            }
+
+            void operator= ( const LMat& other )
+            {
+                if ( m_buffer != NULL )
+                {
+                    delete m_buffer;
+                }
+
+                m_buffer = new T[ other.m_rows * other.m_cols * other.m_channels];
+                m_rows = other.m_rows;
+                m_cols = other.m_cols;
+                m_size = other.m_rows * other.m_cols;
+                m_channels = other.m_channels;
+
+                memcpy( m_buffer, other.m_buffer, sizeof( T ) * m_rows * m_cols * m_channels );
+            }
+
+            ~LMat()
+            {
+                if ( m_buffer != NULL )
+                {
+                    delete[] m_buffer;
+                    m_buffer = NULL;
+                }
+            }
+
             void releaseMemory()
             {
                 delete[] m_buffer;
@@ -122,6 +160,62 @@ namespace felix
                             T _val = m_buffer[ m_channels * _pixIndx + _channel ];
 
                             _val = limitMin + ( limitMax - limitMin ) * ( _val - mMin ) / ( mMax - mMin );
+
+                            m_buffer[ m_channels * _pixIndx + _channel ] = _val;
+                        }
+                    }
+                }
+            }
+
+            void normalize( T limitMin, T limitMax )
+            {
+                float _min = 1000000.0f;
+                float _max = -1000000.0f;
+
+                for ( int _row = 0; _row < m_rows; _row++ )
+                {
+                    for ( int _col = 0; _col < m_cols; _col++ )
+                    {
+                        int _pixIndx = _col + _row * m_cols;
+
+                        for ( int _channel = 0; _channel < m_channels; _channel++ )
+                        {
+                            if ( _channel == 3 )
+                            {
+                                // Skip alpha value
+                                continue;
+                            }
+
+                            T _val = m_buffer[ m_channels * _pixIndx + _channel ];
+
+                            _min = ( _val < _min ) ? _val : _min;
+                            _max = ( _val > _max ) ? _val : _max;
+                        }
+                    }
+                }
+
+                std::cout << "min: " << _min << std::endl;
+                std::cout << "max: " << _max << std::endl;
+
+                for ( int _row = 0; _row < m_rows; _row++ )
+                {
+                    for ( int _col = 0; _col < m_cols; _col++ )
+                    {
+                        int _pixIndx = _col + _row * m_cols;
+
+                        for ( int _channel = 0; _channel < m_channels; _channel++ )
+                        {
+                            if ( _channel == 3 )
+                            {
+                                // Skip alpha channel
+                                continue;
+                            }
+
+                            T _val = m_buffer[ m_channels * _pixIndx + _channel ];
+
+                            _val = limitMin + ( limitMax - limitMin ) * ( _val - _min ) / ( _max - _min );
+
+                            m_buffer[ m_channels * _pixIndx + _channel ] = _val;
                         }
                     }
                 }

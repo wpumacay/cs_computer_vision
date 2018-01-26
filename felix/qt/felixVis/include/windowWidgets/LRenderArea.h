@@ -25,6 +25,7 @@ namespace qt {
         void resetWithImage( QImage pImage );
         void setCurrentImage( QImage pImage );
         QImage getCurrentImage();
+        QImage getShowingImage();
 
         protected :
 

@@ -52,7 +52,7 @@ namespace qt {
         return utils::toMatf( _matu8 );
     }
 
-    QImage mat2qImage( core::LMatf mat )
+    QImage mat2qImage( const core::LMatf& mat )
     {
         auto _format = QImage::Format_RGB32;
 

@@ -124,7 +124,7 @@ namespace felix
         LFourierTransform2D fft2( const core::LMatf& lmat );
         core::LMatf fft2_inverse( const LFourierTransform2D& ft );
 
-        LFourierTransform2D dft( const core::LMatf& lMat );
+        LFourierTransform2D dft( core::LMatf lMat );
         core::LMatf dft_inverse( const LFourierTransform2D& ft );
 
         LFourierTransform2D shiftCenter( const LFourierTransform2D& ft );

@@ -2,3 +2,6 @@
 #include "EWIEGA46WW/moc_mainwindow.cpp"
 #include "UYX5XTB5RZ/moc_lpanelaffinetransforms.cpp"
 #include "UYX5XTB5RZ/moc_lpanelconvolution.cpp"
+#include "UYX5XTB5RZ/moc_lpanelfouriertransform.cpp"
+#include "UYX5XTB5RZ/moc_lpanelhistogramequalization.cpp"
+#include "UYX5XTB5RZ/moc_lpanelmedianfilter.cpp"

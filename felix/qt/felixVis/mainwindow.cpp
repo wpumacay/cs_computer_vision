@@ -24,7 +24,7 @@ namespace qt {
 
         m_renderArea = new LRenderArea();
 
-        QImage _image( "../../res/lena.jpeg" );
+        QImage _image( "../../res/leo.jpg" );
 
         setCentralWidget( m_renderArea );
 
@@ -51,6 +51,9 @@ namespace qt {
 
         m_panelAffineTransforms = NULL;
         m_panelConvolution = NULL;
+        m_panelHistogramEqualization = NULL;
+        m_panelMedianFilter = NULL;
+        m_panelFourierTransform = NULL;
     }
 
     LMainWindow::~LMainWindow()
@@ -67,6 +70,24 @@ namespace qt {
             m_panelConvolution = NULL;
         }
 
+        if ( m_panelHistogramEqualization != NULL )
+        {
+            delete m_panelHistogramEqualization;
+            m_panelHistogramEqualization = NULL;
+        }
+
+        if ( m_panelMedianFilter != NULL )
+        {
+            delete m_panelMedianFilter;
+            m_panelMedianFilter = NULL;
+        }
+
+        if ( m_panelFourierTransform != NULL )
+        {
+            delete m_panelFourierTransform;
+            m_panelFourierTransform = NULL;
+        }
+
         delete ui;
     }
     
@@ -78,14 +99,21 @@ namespace qt {
 
         connect( ui->qActionAffine, &QAction::triggered, this, &LMainWindow::slotAffine );
         connect( ui->qActionConvolution, &QAction::triggered, this, &LMainWindow::slotConvolution );
-
+        connect( ui->qActionHistEqualization, &QAction::triggered, this, &LMainWindow::slotHistEqualization );
+        connect( ui->qActionMedianFilter, &QAction::triggered, this, &LMainWindow::slotMedianFilter );
+        connect( ui->qActionFourier, &QAction::triggered, this, &LMainWindow::slotFourierTransform );
     }
 
-    QImage LMainWindow::requestRenderImage()
+    QImage LMainWindow::requestRenderImage( bool requestedWorkingImage )
     {
         assert( m_renderArea != NULL );
-        
-        return m_renderArea->getCurrentImage();
+
+        if ( requestedWorkingImage )
+        {
+            return m_renderArea->getCurrentImage();
+        }
+
+        return m_renderArea->getShowingImage();
     }
     
     void LMainWindow::setRenderImage( QImage image )
@@ -105,6 +133,11 @@ namespace qt {
         
         m_renderArea->resetWithImage( QImage( _filename ) );
         m_renderArea->update();
+
+        if ( m_panelHistogramEqualization != NULL )
+        {
+            m_panelHistogramEqualization->showHistogram();
+        }
     }
 
     void LMainWindow::slotSave()
@@ -143,6 +176,41 @@ namespace qt {
         m_panelConvolution->setMasterWindow( this );
     }
 
+    void LMainWindow::slotHistEqualization()
+    {
+        if ( m_panelHistogramEqualization != NULL )        
+        {
+            m_panelHistogramEqualization->show();
+            return;
+        }
 
+        m_panelHistogramEqualization = new LPanelHistogramEqualization();
+        m_panelHistogramEqualization->setMasterWindow( this );
+    }
+
+
+    void LMainWindow::slotMedianFilter()
+    {
+        if ( m_panelMedianFilter != NULL )        
+        {
+            m_panelMedianFilter->show();
+            return;
+        }
+
+        m_panelMedianFilter = new LPanelMedianFilter();
+        m_panelMedianFilter->setMasterWindow( this );
+    }
+
+    void LMainWindow::slotFourierTransform()
+    {
+        if ( m_panelFourierTransform != NULL )
+        {
+            m_panelFourierTransform->show();
+            return;
+        }
+
+        m_panelFourierTransform = new LPanelFourierTransform();
+        m_panelFourierTransform->setMasterWindow( this );
+    }
 
 }}

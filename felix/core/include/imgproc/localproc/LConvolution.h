@@ -22,6 +22,8 @@ namespace felix
 
         LConvKernel();
         LConvKernel( int cols, int rows );
+        LConvKernel( const LConvKernel& other );
+        void operator= ( const LConvKernel& other );
         ~LConvKernel();
 
         float operator() ( int col, int row ) const;
@@ -34,6 +36,8 @@ namespace felix
 
         int halfCols() const { return ( m_cols - 1 ) / 2; }
         int halfRows() const { return ( m_rows - 1 ) / 2; }
+
+        void print();
     };
 
     LConvKernel makeKernelAverage( int cols, int rows );

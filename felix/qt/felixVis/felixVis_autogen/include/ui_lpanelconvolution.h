@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'lpanelconvolution.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.2
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -72,8 +72,8 @@ public:
 
     void retranslateUi(QDialog *LPanelConvolution)
     {
-        LPanelConvolution->setWindowTitle(QApplication::translate("LPanelConvolution", "Dialog", 0));
-        mLabelTitle->setText(QApplication::translate("LPanelConvolution", "Convolutions", 0));
+        LPanelConvolution->setWindowTitle(QApplication::translate("LPanelConvolution", "Dialog", nullptr));
+        mLabelTitle->setText(QApplication::translate("LPanelConvolution", "Convolutions", nullptr));
     } // retranslateUi
 
 };

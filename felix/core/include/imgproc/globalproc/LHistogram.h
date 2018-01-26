@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../../mat/LMat.h"
+#include <vector>
 
 using namespace std;
 
@@ -37,12 +38,12 @@ namespace felix
 
         private :
 
-        static LHist _computeHistogram( const core::LMatu& lmat );
-        static LHistTransform _computeHistTransform( const LHist& histogram );
+        static LHistTransform _computeHistTransform( const LHist& histogram, int channel = 0 );
 
 
         public :
 
+        static LHist _computeHistogram( const core::LMatu& lmat, int channel = 0 );
         static core::LMatu equalize( const core::LMatu& lmat );
     };
 

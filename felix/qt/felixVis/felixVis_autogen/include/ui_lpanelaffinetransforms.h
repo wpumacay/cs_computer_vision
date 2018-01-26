@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'lpanelaffinetransforms.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.2
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -115,11 +115,11 @@ public:
 
     void retranslateUi(QDialog *LPanelAffineTransforms)
     {
-        LPanelAffineTransforms->setWindowTitle(QApplication::translate("LPanelAffineTransforms", "Affine transformations", 0));
-        mLabelTitle->setText(QApplication::translate("LPanelAffineTransforms", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Affine transforms</span></p></body></html>", 0));
-        mLabelRotation->setText(QApplication::translate("LPanelAffineTransforms", "Rotation", 0));
-        mLabelTranslation->setText(QApplication::translate("LPanelAffineTransforms", "Translation", 0));
-        mLabelScale->setText(QApplication::translate("LPanelAffineTransforms", "Scale", 0));
+        LPanelAffineTransforms->setWindowTitle(QApplication::translate("LPanelAffineTransforms", "Affine transformations", nullptr));
+        mLabelTitle->setText(QApplication::translate("LPanelAffineTransforms", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Affine transforms</span></p></body></html>", nullptr));
+        mLabelRotation->setText(QApplication::translate("LPanelAffineTransforms", "Rotation", nullptr));
+        mLabelTranslation->setText(QApplication::translate("LPanelAffineTransforms", "Translation", nullptr));
+        mLabelScale->setText(QApplication::translate("LPanelAffineTransforms", "Scale", nullptr));
     } // retranslateUi
 
 };
