@@ -1,0 +1,3 @@
+[submodule "felix/ext/felixcam"]
+	path = felix/ext/felixcam
+	url = https://github.com/wpumacay/felixcam.git
