@@ -157,6 +157,8 @@ namespace felix
             }
         }
 
+        // TODO: Apply saturation here
+
         return _res;
     }
 

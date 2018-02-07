@@ -12,6 +12,7 @@ cuda_add_library( felix
                   src/imgproc/localproc/LConvolution.cpp
                   src/imgproc/localproc/LMedianFilter.cpp
                   src/imgproc/globalproc/LHistogram.cpp
+                  src/imgproc/globalproc/LThresholding.cpp
                   src/transforms/LAffineTransforms.cpp
                   src/transforms/LFourierTransform.cpp
                   src/utils/LUtils.cpp

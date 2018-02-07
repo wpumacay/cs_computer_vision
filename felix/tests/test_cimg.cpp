@@ -1,8 +1,10 @@
 
-
+#include <iostream>
+#define cimg_use_jpeg
 #include <CImg.h>
 
 using namespace cimg_library;
+using namespace std;
 
 typedef unsigned char u8;
 
@@ -11,8 +13,7 @@ int main()
 {
     const u8 red[] = { 255, 0, 0 }, green[] = { 0, 255, 0 }, blue[] = { 0, 0, 255 };
 
-    CImg<u8> image( "../res/lena.jpg" ), visu( 500, 400, 1, 3, 0 );
-    image.blur( 2.5 );
+    CImg<u8> image( "../res/lena.jpeg" ), visu( 500, 400, 1, 3, 0 );
 
     CImgDisplay main_disp( image, "Click a point" ), draw_disp( visu, "Intensity profile" );
 

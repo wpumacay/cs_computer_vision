@@ -4,6 +4,8 @@
 
 #include "../mat/LMat.h"
 
+#include <cstring>
+
 using namespace std;
 
 
@@ -13,6 +15,8 @@ namespace felix
 
     namespace transforms
     {
+
+        int _nextPow2( int v );
 
         class LComplexSignal1D
         {
@@ -40,10 +44,7 @@ namespace felix
                 m_len = other.m_len;
                 m_buff = new LVec2[m_len];
 
-                for ( int q = 0; q < m_len; q++ )
-                {
-                    m_buff[q] = other.m_buff[q];
-                }
+                memcpy( m_buff, other.m_buff, sizeof( LVec2 ) * m_len );
             }
 
             LComplexSignal1D& operator=( const LComplexSignal1D& other )
@@ -56,10 +57,7 @@ namespace felix
                 m_len = other.m_len;
                 m_buff = new LVec2[m_len];
 
-                for ( int q = 0; q < m_len; q++ )
-                {
-                    m_buff[q] = other.m_buff[q];
-                }
+                memcpy( m_buff, other.m_buff, sizeof( LVec2 ) * m_len );
 
                 return *this;
             }

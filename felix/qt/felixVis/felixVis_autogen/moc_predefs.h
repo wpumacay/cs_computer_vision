@@ -190,6 +190,7 @@
 #define _STDC_PREDEF_H 1
 #define __cpp_decltype_auto 201304
 #define __GCC_ATOMIC_INT_LOCK_FREE 2
+#define OPENCL_SUPPORT_ENABLED 1
 #define __FLT128_MAX_EXP__ 16384
 #define __FLT32_MANT_DIG__ 24
 #define __FLOAT_WORD_ORDER__ __ORDER_LITTLE_ENDIAN__

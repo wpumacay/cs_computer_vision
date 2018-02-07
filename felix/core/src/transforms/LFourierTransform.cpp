@@ -259,6 +259,37 @@ namespace felix
             return _img;
         }
 
+
+
+        int _nextPow2( int v )
+        {
+            
+        }
+
+
+
+
+        void dft1d( const LComplexSignal1D& src, LComplexSignal1D& dst )
+        {
+
+        }
+
+
+
+
+
+        void fft1d( const LComplexSignal1D& src, LComplexSignal1D& dst )
+        {
+
+        }
+
+
+
+
+
+
+
+
     }
 
 
