@@ -76,7 +76,7 @@ int main()
 
     cout << "testing visualizer" << endl;
 
-    auto _img = felix::core::LLoaderBitmap::load( string( "../res/leo.bmp" ) );
+    auto _img = felix::core::LLoaderBitmap::load( string( "../../res/leo.bmp" ) );
     g_img = felix::core::rgb2gray<u8>( *_img );
     delete _img;
 

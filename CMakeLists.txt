@@ -3,8 +3,8 @@ project( felix )
 
 set( CMAKE_BUILD_TYPE Debug )
 
-set( CMAKE_C_COMPILER /usr/bin/gcc-6 )
-set( CMAKE_CXX_COMPILER /usr/bin/g++-6 )
+## set( CMAKE_C_COMPILER /usr/bin/gcc-6 )
+## set( CMAKE_CXX_COMPILER /usr/bin/g++-6 )
 
 set( CMAKE_CXX_STANDARD 11 )
 set( CMAKE_CXX_FLAGS_DEBUG "-g -Wno-unused-parameter" )
@@ -70,5 +70,5 @@ endif()
 
 add_subdirectory( core )
 add_subdirectory( tests )
-add_subdirectory( qt/felixVis )
+## add_subdirectory( qt/felixVis )
 
